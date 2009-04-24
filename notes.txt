@@ -1,0 +1,10 @@
+NEED TO
+
+defining:
+- keep track of work tasks to be done
+- keep track of dependencies for each work task
+
+running:
+- run dependencies before running the current task
+- keep track of work tasks that have already been run
+- run the code block for each task
