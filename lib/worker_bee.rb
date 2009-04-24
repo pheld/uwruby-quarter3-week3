@@ -13,8 +13,9 @@ class WorkerBee
 
   end
 
-  def work name, dependencies, &block
-    puts "wow you defined a block named #{name}"
+  def work name, *dependencies, &block
+    new_task = WorkerBee::Work.new(name, dependencies, block)
+    @work_list << new_task
   end
 
   def self.run
@@ -26,7 +27,7 @@ class WorkerBee
     attr_reader :name
     attr_reader :dependencies
 
-    def initialize(name, dependencies, &block)
+    def initialize(name, dependencies, block)
       @name = name
       @dependencies = dependencies
       @block = block

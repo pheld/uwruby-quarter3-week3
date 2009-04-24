@@ -1,8 +1,8 @@
 NEED TO
 
 defining:
-- keep track of work tasks to be done
-- keep track of dependencies for each work task
+X keep track of work tasks to be done
+X keep track of dependencies for each work task
 
 running:
 - run dependencies before running the current task
