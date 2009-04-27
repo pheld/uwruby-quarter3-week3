@@ -3,8 +3,10 @@ NEED TO
 defining:
 X keep track of work tasks to be done
 X keep track of dependencies for each work task
+X provide means of calling the 'work' method from the DSL 
 
 running:
+X run the code in the 'recipe' block
 - run dependencies before running the current task
 - keep track of work tasks that have already been run
-- run the code block for each task
+- run the code block for the specified task
