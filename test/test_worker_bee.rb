@@ -56,4 +56,48 @@ class TestWorkerBee < Test::Unit::TestCase
     assert_equal("return value", return_val)
   end 
 
+  def test_dependencies_get_run
+    WorkerBee.recipe do
+      work :test_work_item, :dependency_1, :dependency_2 do
+        "test_work_item return value"
+      end
+
+      work :dependency_1 do
+        "dependency_1 return value"
+      end
+
+      work :dependency_2 do
+        "dependency_2 return value"
+      end
+    end
+
+    WorkerBee.run :test_work_item
+
+    assert_not_nil(WorkerBee.work_done[:test_work_item])
+    assert_not_nil(WorkerBee.work_done[:dependency_1])
+    assert_not_nil(WorkerBee.work_done[:dependency_2])
+  end
+
+  def test_previously_run_dependencies_get_skipped
+    WorkerBee.recipe do
+      work :test_work_item, :already_run_dependency, :regular_dependency do
+        "test_work_item return value"
+      end
+
+      work :regular_dependency, :arleady_run_dependency do
+        "regular_dependency return value"
+      end
+
+      work :already_run_dependency do
+        "already_run_dependency return value"
+      end
+
+      WorkerBee.run :test_work_item
+
+      # asser that everything got run once each (no double task execution)
+      assert_equal(1, WorkerBee.work_done[:test_work_item])
+      assert_equal(1, WorkerBee.work_done[:already_run_dependency])
+      assert_equal(1, WorkerBee.work_done[:regular_dependency])
+    end
+  end
 end
