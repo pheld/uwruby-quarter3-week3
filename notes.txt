@@ -9,5 +9,5 @@ running:
 X run the code in the 'recipe' block
 X run dependencies before running the current task
 X keep track of work tasks that have already been run
-- don't run dependencies that have already been run
+X don't run dependencies that have already been run
 X run the code block for the specified task
