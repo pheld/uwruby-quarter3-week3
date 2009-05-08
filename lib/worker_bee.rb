@@ -3,6 +3,7 @@
 require 'thread'
 
 class WorkerBee
+  VERSION = '1.0.0'
   
   @@work_items = {}
 
